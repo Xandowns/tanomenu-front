@@ -1,1 +1,1 @@
-# tanomenu-front
+# TANOMENU
