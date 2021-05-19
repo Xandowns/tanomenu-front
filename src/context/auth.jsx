@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-import { useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+
 import api from '../services/api';
 
 const AuthContext = createContext({ signed: true, user: {} });
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.setItem(
       'token',
-      JSON.stringify(`Bearer ${response.data.access_token}`)
+      JSON.stringify(`Bearer ${response.data.access_token}`),
     );
     api.defaults.headers.Authorization = `Bearer ${response.data.access_token}`;
   }

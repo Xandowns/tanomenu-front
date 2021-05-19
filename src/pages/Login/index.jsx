@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/button-has-type */
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthContext from '../../context/auth';
@@ -10,7 +12,7 @@ const Login = () => {
 
   const { signed, signIn } = useContext(AuthContext);
 
-  let history = useHistory();
+  const history = useHistory();
 
   const handleSignIn = () => {
     signIn(values.email, values.password, 'gym');
@@ -41,7 +43,7 @@ const Login = () => {
         placeholder="Digite seu endereço de e-mail"
       />
 
-      <label for="password" className="text-dark_grey text-2xl font-light">
+      <label htmlFor="password" className="text-dark_grey text-2xl font-light">
         Senha
       </label>
       <input
@@ -61,7 +63,8 @@ const Login = () => {
           Entrar
         </button>
         <p className="font-light mt-4">
-          Ainda não tem uma conta? Faça seu cadastro{' '}
+          Ainda não tem uma conta? Faça seu cadastro
+          {' '}
           <Link to="/cadastro" className="text-primary font-normal">
             clicando aqui
           </Link>
