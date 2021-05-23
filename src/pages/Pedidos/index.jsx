@@ -3,7 +3,7 @@ import Instructors from '../../components/Instructors';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
-const Dashboard = () => {
+const Pedidos = () => {
   const [instructorsData, setInstructorsData] = useState([]);
 
   const token = localStorage.getItem('token');
@@ -20,18 +20,12 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex justify-between md:px-32 md:py-6 pl-8 py-3">
-        <Link
-          to="/newinstructor"
-          className="bg-primary mt-8 px-4 py-2 rounded-full text-white font-bold "
-        >
-          Adicionar Instrutor
-        </Link>
         <Link to="/dashboard" className="mt-12 text-primary font-bold">
-          Visualizar alunos
+          Voltar ao cardápio
         </Link>
       </div>
       <div className="flex flex-col justify-center p-4 lg:px-40 ">
-        {instructorsData.map((instructor, i) => {
+        {/* {instructorsData.map((instructor, i) => {
           return (
             <Instructors
               key={i}
@@ -44,9 +38,9 @@ const Dashboard = () => {
               leave={instructor.leave}
             />
           );
-        })}
+        })} */}
       </div>
     </>
   );
 };
-export default Dashboard;
+export default Pedidos;

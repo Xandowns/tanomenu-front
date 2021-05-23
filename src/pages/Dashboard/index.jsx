@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Students from '../../components/Students/index';
+import Menu from '../../components/Menu/index';
 import api from '../../services/api';
 
 const Dashboard = () => {
@@ -27,14 +27,14 @@ const Dashboard = () => {
           Adicionar Prato
         </Link>
         <Link
-          to="/dashboard/instrutores"
-          className="mt-12 text-primary font-bold hidden"
+          to="/dashboard/pedidos"
+          className="bg-primary mt-8 px-4 py-2 rounded-full text-white font-bold  "
         >
-          Visualizar pratos
+          Visualizar pedidos
         </Link>
       </div>
       <div className="flex flex-col justify-center p-4 lg:px-40 ">
-        <Students
+        <Menu
           key={1}
           id={1}
           name="Feijoada"
@@ -43,21 +43,13 @@ const Dashboard = () => {
           cookTime="20 Min"
           ingredientsList="Feijão Preto, Couve, Porco, Torresmo, Limão"
         />
-        {clientsData.map((student, i) => (
-          <Students
+        {clientsData.map((recipe, i) => (
+          <Menu
             key={i}
-            id={student.id}
-            email={student.email}
-            name={student.name}
-            phone={student.phone}
-            weight={student.weight}
-            height={student.height}
-            street={student.street}
-            number={student.number}
-            neighborhood={student.neighborhood}
-            city={student.city}
-            zipcode={student.zipcode}
-            sex={student.sex}
+            id={recipe.id}
+            image={recipe.img}
+            name={recipe.name}
+            description={recipe.description}
           />
         ))}
       </div>

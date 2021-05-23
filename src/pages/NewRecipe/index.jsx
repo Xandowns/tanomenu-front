@@ -25,30 +25,32 @@ const NewRecipe = () => {
 
   const history = useHistory();
 
-  const notify = () => toast.success(
-    '😎👍 Aluno adicionado. Você sera redirecionado para o dashboard',
-    {
-      position: 'top-right',
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    },
-  );
-  const notifyError = () => toast.error(
-    '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
-    {
-      position: 'top-right',
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    },
-  );
+  const notify = () =>
+    toast.success(
+      '😎👍 Aluno adicionado. Você sera redirecionado para o dashboard',
+      {
+        position: 'top-right',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  const notifyError = () =>
+    toast.error(
+      '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
+      {
+        position: 'top-right',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
 
   const handleSubmit = () => {
     api
@@ -84,7 +86,10 @@ const NewRecipe = () => {
       />
       <div className="flex flex-col mx-auto justify-center p-4 lg:w-4/12 lg:mt-16">
         <h1 className="font-bold text-4xl text-dark_grey">Adicionar prato</h1>
-        <label htmlFor="name" className="text-dark_grey text-2xl font-light mt-6">
+        <label
+          htmlFor="name"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
           Nome
         </label>
         <input
@@ -95,7 +100,17 @@ const NewRecipe = () => {
           value={values.name}
           onChange={handleChange}
         />
-        <label htmlFor="cookTime" className="text-dark_grey text-2xl font-light mt-6">
+        <label
+          htmlFor="img"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
+          Imagem
+        </label>
+        <input type="file" name="Upload de arquivo" className="mt-6" />
+        <label
+          htmlFor="cookTime"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
           Tempo de preparo
         </label>
         <input
@@ -106,7 +121,10 @@ const NewRecipe = () => {
           value={values.cookTime}
           onChange={handleChange}
         />
-        <label htmlFor="price" className="text-dark_grey text-2xl font-light mt-6">
+        <label
+          htmlFor="price"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
           Preço
         </label>
         <input
@@ -117,7 +135,10 @@ const NewRecipe = () => {
           value={values.price}
           onChange={handleChange}
         />
-        <label htmlFor="ingredientsList" className="text-dark_grey text-2xl font-light mt-6">
+        <label
+          htmlFor="ingredientsList"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
           Ingredientes
         </label>
         <input

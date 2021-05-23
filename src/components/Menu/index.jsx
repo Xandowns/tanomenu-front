@@ -11,13 +11,7 @@ import { ReactComponent as Clock } from '../../assets/clock.svg';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Students = ({
-  id,
-  name,
-  price,
-  cookTime,
-  ingredientsList,
-}) => {
+const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [data, setData] = useState({
     id,
@@ -32,15 +26,16 @@ const Students = ({
     notifyDeleteSucces();
   };
 
-  const notifyDeleteSucces = () => toast.success('😎👍 O aluno foi deletado com sucesso.', {
-    position: 'top-right',
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+  const notifyDeleteSucces = () =>
+    toast.success('😎👍 O prato foi deletado com sucesso.', {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const handleEdit = () => {
     api
@@ -52,18 +47,8 @@ const Students = ({
       .catch(() => notifyEditError());
   };
 
-  const notifyEditSucces = () => toast.success('😎👍 Edição efetuada com sucesso.', {
-    position: 'top-right',
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-  const notifyEditError = () => toast.error(
-    '💀 Um erro ocorreu. Verifique se todos os campos estão preenchidos',
-    {
+  const notifyEditSucces = () =>
+    toast.success('😎👍 Edição efetuada com sucesso.', {
       position: 'top-right',
       autoClose: 4000,
       hideProgressBar: false,
@@ -71,8 +56,20 @@ const Students = ({
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-    },
-  );
+    });
+  const notifyEditError = () =>
+    toast.error(
+      '💀 Um erro ocorreu. Verifique se todos os campos estão preenchidos',
+      {
+        position: 'top-right',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -106,13 +103,7 @@ const Students = ({
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <div className="flex flex-row justify-between">
           <h1 className="text-xl">
-            Editar dados de
-            {' '}
-            <span className="font-bold">
-              {' '}
-              {data.name}
-              {' '}
-            </span>
+            Editar dados de <span className="font-bold"> {data.name} </span>
           </h1>
           <button
             onClick={closeModal}
@@ -196,9 +187,7 @@ const Students = ({
         </div>
         <div className="flex flex-row md:w-11/12">
           <Casa className="h-12 w-12 pb-5" />
-          <p className="text-dark_grey md:pl-2">
-            {data.ingredientsList}
-          </p>
+          <p className="text-dark_grey md:pl-2">{data.ingredientsList}</p>
         </div>
         <div className="flex flex-row md:w-6/6">
           <Delete
@@ -215,4 +204,4 @@ const Students = ({
   );
 };
 
-export default Students;
+export default Menu;

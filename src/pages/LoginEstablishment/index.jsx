@@ -63,9 +63,8 @@ const Login = () => {
           Entrar
         </button>
         <p className="font-light mt-4">
-          Ainda não tem uma conta? Faça seu cadastro
-          {' '}
-          <Link to="/cadastro" className="text-primary font-normal">
+          Ainda não tem uma conta? Faça seu cadastro{' '}
+          <Link to="/opcaocadastro" className="text-primary font-normal">
             clicando aqui
           </Link>
         </p>

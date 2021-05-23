@@ -221,7 +221,7 @@ const Signup = () => {
 
         <p className="font-light mt-4 text-center">
           Já possui uma conta? Faça login{' '}
-          <Link to="/cadastro" className="text-primary font-normal">
+          <Link to="/opcaologin" className="text-primary font-normal">
             clicando aqui
           </Link>
         </p>
