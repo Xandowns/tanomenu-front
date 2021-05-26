@@ -10,13 +10,13 @@ const Navbar = () => {
       </Link>
       <div className="flex flex-row">
         <Link
-          to="/opcaologin"
+          to="/opcao-login"
           className="mr-4 bg-white py-2 px-4 rounded-full text-primary"
         >
           Login
         </Link>
         <Link
-          to="/opcaocadastro"
+          to="/opcao-cadastro"
           className="mr-4 bg-white py-2 px-4 rounded-full text-primary"
         >
           Cadastro
