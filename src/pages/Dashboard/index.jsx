@@ -21,7 +21,7 @@ const Dashboard = () => {
     <>
       <div className="flex justify-between md:px-32 md:py-6 pl-8 py-3">
         <Link
-          to="/newrecipe"
+          to="/dashboard/newrecipe"
           className="bg-primary mt-8 px-4 py-2 rounded-full text-white font-bold "
         >
           Adicionar Prato

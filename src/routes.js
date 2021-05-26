@@ -13,19 +13,19 @@ import Pedidos from './pages/Pedidos';
 import LoginClient from './pages/LoginClient';
 import LoginOpt from './pages/LoginOpt';
 import SignupOpt from './pages/SignupOpt';
+import ClientRegist from './pages/ClientRegist';
 
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/login-estabelecimento" component={Login} />
-    <Route path="/opcaologin" component={LoginOpt} />
-    <Route path="/login-cliente" component={LoginClient} />
-    <Route path="/opcaocadastro" component={SignupOpt} />
+    <Route path="/opcao-login" component={LoginOpt} />
+    <Route path="/opcao-login/login-estabelecimento" component={Login} />
+    <Route path="/opcao-login/login-cliente" component={LoginClient} />
+    <Route path="/opcao-cadastro" component={SignupOpt} />
+    <Route path="/opcao-cadastro/cadastro-restaurante" component={Signup} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/pedidos" component={Pedidos} />
-    <Route path="/cadastro-restaurante" component={Signup} />
-    <Route path="/newrecipe" component={NewRecipe} />
-    <Route path="/newinstructor" component={NewInstructor} />
+    <Route path="/dashboard/newrecipe" component={NewRecipe} />
   </Switch>
 );
 

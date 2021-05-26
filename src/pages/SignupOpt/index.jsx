@@ -8,14 +8,14 @@ const SignupOpt = () => {
   return (
     <div className="flex flex-col mx-auto justify-center p-4 lg:w-4/12 lg:mt-20">
       <Link
-        to="/cadastro-restaurante"
+        to="/opcao-cadastro/cadastro-restaurante"
         className=" bg-primary p-2 rounded-full text-white font-bold text-center"
       >
         Estabelecimento
       </Link>
       <a className="text-dark_grey m-6 text-center">Ou</a>
       <Link
-        to="/login-cliente"
+        to="/opcao-cadastro/login-cliente"
         className=" bg-primary p-2 rounded-full text-white font-bold text-center"
       >
         Cliente
