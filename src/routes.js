@@ -17,10 +17,10 @@ import SignupOpt from './pages/SignupOpt';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/opcao-login" component={LoginOpt} />
+    <Route exact path="/opcao-login" component={LoginOpt} />
     <Route path="/opcao-login/login-estabelecimento" component={Login} />
     <Route path="/opcao-login/login-cliente" component={LoginClient} />
-    <Route path="/opcao-cadastro" component={SignupOpt} />
+    <Route exact path="/opcao-cadastro" component={SignupOpt} />
     <Route path="/opcao-cadastro/cadastro-restaurante" component={Signup} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/pedidos" component={Pedidos} />
