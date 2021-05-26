@@ -13,7 +13,6 @@ import Pedidos from './pages/Pedidos';
 import LoginClient from './pages/LoginClient';
 import LoginOpt from './pages/LoginOpt';
 import SignupOpt from './pages/SignupOpt';
-import ClientRegist from './pages/ClientRegist';
 
 const Routes = () => (
   <Switch>
