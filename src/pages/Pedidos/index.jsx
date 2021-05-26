@@ -21,7 +21,7 @@ const Pedidos = () => {
     <>
       <div className="flex justify-between md:px-32 md:py-6 pl-8 py-3">
         <Link to="/dashboard" className="mt-12 text-primary font-bold">
-          Voltar ao cardápio
+          &lt; Voltar ao cardápio
         </Link>
       </div>
       <div className="flex flex-col justify-center p-4 lg:px-40 ">

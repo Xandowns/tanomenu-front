@@ -16,7 +16,7 @@ import SignupOpt from './pages/SignupOpt';
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
+    <Route name="" exact path="/" component={Home} />
     <Route exact path="/opcao-login" component={LoginOpt} />
     <Route path="/opcao-login/login-estabelecimento" component={Login} />
     <Route path="/opcao-login/login-cliente" component={LoginClient} />
