@@ -16,7 +16,7 @@ const Navbar = () => {
           Login
         </Link>
         <Link
-          to="/opcao-cadastro"
+          to="/cadastro-restaurante"
           className="mr-4 bg-white py-2 px-4 rounded-full text-primary"
         >
           Cadastro

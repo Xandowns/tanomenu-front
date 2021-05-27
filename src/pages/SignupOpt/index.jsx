@@ -13,13 +13,6 @@ const SignupOpt = () => {
       >
         Estabelecimento
       </Link>
-      <a className="text-dark_grey m-6 text-center">Ou</a>
-      <Link
-        to="/opcao-cadastro/login-cliente"
-        className=" bg-primary p-2 rounded-full text-white font-bold text-center"
-      >
-        Cliente
-      </Link>
     </div>
   );
 };
