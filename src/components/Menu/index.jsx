@@ -11,7 +11,9 @@ import { ReactComponent as Clock } from '../../assets/clock.svg';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
+const Menu = ({
+  id, name, price, cookTime, ingredientsList,
+}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [data, setData] = useState({
     id,
@@ -26,16 +28,15 @@ const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
     notifyDeleteSucces();
   };
 
-  const notifyDeleteSucces = () =>
-    toast.success('😎👍 O prato foi deletado com sucesso.', {
-      position: 'top-right',
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+  const notifyDeleteSucces = () => toast.success('😎👍 O prato foi deletado com sucesso.', {
+    position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   const handleEdit = () => {
     api
@@ -47,8 +48,18 @@ const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
       .catch(() => notifyEditError());
   };
 
-  const notifyEditSucces = () =>
-    toast.success('😎👍 Edição efetuada com sucesso.', {
+  const notifyEditSucces = () => toast.success('😎👍 Edição efetuada com sucesso.', {
+    position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+  const notifyEditError = () => toast.error(
+    '💀 Um erro ocorreu. Verifique se todos os campos estão preenchidos',
+    {
       position: 'top-right',
       autoClose: 4000,
       hideProgressBar: false,
@@ -56,20 +67,8 @@ const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-    });
-  const notifyEditError = () =>
-    toast.error(
-      '💀 Um erro ocorreu. Verifique se todos os campos estão preenchidos',
-      {
-        position: 'top-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      }
-    );
+    },
+  );
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -103,7 +102,13 @@ const Menu = ({ id, name, price, cookTime, ingredientsList }) => {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <div className="flex flex-row justify-between">
           <h1 className="text-xl">
-            Editar dados de <span className="font-bold"> {data.name} </span>
+            Editar dados de
+            {' '}
+            <span className="font-bold">
+              {' '}
+              {data.name}
+              {' '}
+            </span>
           </h1>
           <button
             onClick={closeModal}

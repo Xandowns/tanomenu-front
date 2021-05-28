@@ -10,10 +10,10 @@ const Footer = () => {
           <Link to="/" className="text-gray-600">
             Home
           </Link>
-          <Link to="/login" className="text-gray-600 mt-2">
+          <Link to="/opcao-login" className="text-gray-600 mt-2">
             Login
           </Link>
-          <Link to="/cadastro" className="text-gray-600 mt-2">
+          <Link to="/opcao-cadastro" className="text-gray-600 mt-2">
             Cadastro
           </Link>
         </ul>

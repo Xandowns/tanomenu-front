@@ -10,46 +10,47 @@ import api from '../../services/api';
 const Signup = () => {
   // const { handleChange, values, handleSubmit } = useForm(validate);
 
-  let history = useHistory();
+  const history = useHistory();
 
-  const notify = () =>
-    toast.success(
-      '😎👍 Cadastro efetuado com sucesso. Você sera redirecionado para o login',
-      {
-        position: 'top-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      }
-    );
-  const notifyError = () =>
-    toast.error(
-      '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
-      {
-        position: 'top-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      }
-    );
+  const notify = () => toast.success(
+    '😎👍 Cadastro efetuado com sucesso. Você sera redirecionado para o login',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
+  const notifyError = () => toast.error(
+    '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
 
   const [values, setValues] = useState({
-    name: '',
-    neighborhood: '',
-    street: '',
-    number: 0,
-    complement: '',
-    zipcode: '',
-    city: '',
-    phone: '',
-    email: '',
-    password: '',
+    Name: '',
+    Description: '',
+    Category: 'Outros',
+    Street: '',
+    Number: 0,
+    Complement: '',
+    Neighborhood: '',
+    Zip: '',
+    City: '',
+    Phone: '',
+    Picture: null,
+    Email: '',
+    Password: '',
   });
 
   const handleChange = (e) => {
@@ -58,15 +59,16 @@ const Signup = () => {
       ...values,
       [name]: value,
     });
+
+    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     api
-      .post('/api/gyms', values)
+      .post('/Establishment', values)
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           notify();
           setTimeout(() => {
             history.push('/login');
@@ -74,9 +76,8 @@ const Signup = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status === 422) {
-          notifyError();
-        }
+        console.log(error.response.data);
+        notifyError();
       });
   };
   return (
@@ -100,111 +101,164 @@ const Signup = () => {
           e tenha acesso a nossa plataforma
         </h4>
         <form onSubmit={handleSubmit} className="flex flex-col">
-          <label className="text-dark_grey text-2xl font-light mt-6">
-            E-mail <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Email">
+            E-mail
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
             type="text"
-            name="email"
+            name="Email"
             placeholder="Digite seu endereço de e-mail"
-            value={values.email}
+            value={values.Email}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6">
-            Senha <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Password">
+            Senha
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
             type="password"
-            name="password"
+            name="Password"
             placeholder="Digite sua senha"
-            value={values.password}
+            value={values.Password}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6">
-            Nome do restaurante <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Name">
+            Nome do restaurante
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="name"
+            name="Name"
             placeholder="Digite o nome do seu restaurante"
-            value={values.name}
+            value={values.Name}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6">
-            Bairro <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Category">
+            Categoria
+            {' '}
+          </label>
+          <select
+            className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
+            type="text"
+            name="Category"
+            placeholder="Digite o nome do seu restaurante"
+            value={values.Category}
+            onChange={handleChange}
+            defaultValue="Outros"
+          >
+            <option value="Pizzaria"> Pizzaria </option>
+            <option value="Sorveteria"> Sorveteria </option>
+            <option value="Esfirraria"> Esfirraria </option>
+            <option value="Restaurante"> Restaurante </option>
+            <option value="Pastelaria"> Pastelaria </option>
+            <option value="Lanchonete"> Lanchonete </option>
+            <option value="Churrascaria"> Churrascaria </option>
+            <option value="Outros"> Outros </option>
+          </select>
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Description">
+            Descrição
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="neighborhood"
+            name="Description"
+            placeholder="Digite o nome do seu restaurante"
+            value={values.Description}
+            onChange={handleChange}
+          />
+          <label className="text-dark_grey text-2xl font-light mt-6" htmlFor="Neighborhood">
+            Bairro
+            {' '}
+            <span className="text-red-500">*</span>
+          </label>
+          <input
+            className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
+            type="text"
+            name="Neighborhood"
             placeholder="Digite o bairro do restaurante"
-            value={values.neighborhood}
+            value={values.Neighborhood}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
-            Rua <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Street">
+            Rua
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="street"
+            name="Street"
             placeholder="Digite a rua do restaurante"
-            value={values.street}
+            value={values.Street}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
-            Número <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Number">
+            Número
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="number"
-            name="number"
-            value={values.number}
+            name="Number"
+            value={values.Number}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Complement">
             Complemento
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="complement"
+            name="Complement"
             placeholder="Digite um complemento do restaurante"
-            value={values.complement}
+            value={values.Complement}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
-            CEP <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Zip">
+            CEP
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <InputMask
             mask="99999-999"
-            value={values.zipcode}
+            value={values.Zip}
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
-            name="zipcode"
+            name="Zip"
             placeholder="Digite o cep do restaurante"
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
-            Cidade <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="City">
+            Cidade
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="city"
+            name="City"
             placeholder="Digite a cidade do restaurante"
-            value={values.city}
+            value={values.City}
             onChange={handleChange}
           />
-          <label className="text-dark_grey text-2xl font-light mt-6 w">
-            Telefone <span className="text-red-500">*</span>
+          <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Phone">
+            Telefone
+            {' '}
+            <span className="text-red-500">*</span>
           </label>
           <InputMask
             mask="99 99999-9999"
-            name="phone"
-            value={values.phone}
+            name="Phone"
+            value={values.Phone}
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             placeholder="Digite o telefone do restaurante"
             onChange={handleChange}
@@ -220,7 +274,8 @@ const Signup = () => {
         </form>
 
         <p className="font-light mt-4 text-center">
-          Já possui uma conta? Faça login{' '}
+          Já possui uma conta? Faça login
+          {' '}
           <Link to="/opcaologin" className="text-primary font-normal">
             clicando aqui
           </Link>
