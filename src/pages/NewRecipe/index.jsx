@@ -27,7 +27,7 @@ const NewRecipe = () => {
 
   const notify = () =>
     toast.success(
-      '😎👍 Aluno adicionado. Você sera redirecionado para o dashboard',
+      '😎👍 Prato adicionado. Você sera redirecionado para o dashboard',
       {
         position: 'top-right',
         autoClose: 4000,
