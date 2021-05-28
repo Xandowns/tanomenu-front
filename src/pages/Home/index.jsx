@@ -31,17 +31,17 @@ const Home = () => (
       <Step
         stepNumber={1}
         title="Você cadastra seu restaurante"
-        description="Cadastre seu restaurante no aplicativo para ter todas as funcionalidades!!!"
+        description="Cadastre seu restaurante no aplicativo para ter todas as funcionalidades!"
       />
       <Step
         stepNumber={2}
         title="Você monta seus cardápios"
-        description="Monte seu cardápio e faça as alterações a hora que quiser!!!"
+        description="Monte seu cardápio e faça as alterações a hora que quiser!"
       />
       <Step
         stepNumber={3}
         title="Se prepare para o futuro"
-        description="Mordernize seu restaurante com um cardápio que cabe na palma da mão!!!"
+        description="Mordernize seu restaurante com um cardápio que cabe na palma da mão!"
       />
     </div>
   </>
