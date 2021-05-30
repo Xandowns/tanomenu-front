@@ -1,19 +1,31 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import jwtDecode from 'jwt-decode';
 import api from '../../services/api';
 
 const NewRecipe = () => {
   const initialState = {
-    name: '',
-    price: 'R$ ',
-    cookTime: '',
-    ingredientsList: '',
+    EstablishmentId: null,
+    Name: '',
+    Description: '',
+    Price: '',
+    CookTime: 0,
   };
 
   const [values, setValues] = useState(initialState);
+
+  useEffect(() => {
+    const getEstablishmentId = () => {
+      const token = localStorage.getItem('token');
+      const establishmentId = jwtDecode(token).nameid;
+      setValues({ ...values, EstablishmentId: establishmentId });
+    };
+
+    getEstablishmentId();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,38 +37,36 @@ const NewRecipe = () => {
 
   const history = useHistory();
 
-  const notify = () =>
-    toast.success(
-      '😎👍 Prato adicionado. Você sera redirecionado para o dashboard',
-      {
-        position: 'top-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      }
-    );
-  const notifyError = () =>
-    toast.error(
-      '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
-      {
-        position: 'top-right',
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      }
-    );
+  const notify = () => toast.success(
+    '😎👍 Prato adicionado. Você sera redirecionado para o dashboard',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
+  const notifyError = () => toast.error(
+    '💀 Um erro ocorreu. Verifique se os campos obrigatorios estão preenchidos',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
 
   const handleSubmit = () => {
     api
-      .post('/api/clients', values)
+      .post('/Recipe', values)
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           notify();
           setTimeout(() => {
             history.push('/dashboard');
@@ -65,9 +75,7 @@ const NewRecipe = () => {
       })
       .catch((error) => {
         console.log(error.response);
-        if (error.response.status !== 201) {
-          notifyError();
-        }
+        notifyError();
       });
   };
 
@@ -87,7 +95,7 @@ const NewRecipe = () => {
       <div className="flex flex-col mx-auto justify-center p-4 lg:w-4/12 lg:mt-16">
         <h1 className="font-bold text-4xl text-dark_grey">Adicionar prato</h1>
         <label
-          htmlFor="name"
+          htmlFor="Name"
           className="text-dark_grey text-2xl font-light mt-6"
         >
           Nome
@@ -95,9 +103,9 @@ const NewRecipe = () => {
         <input
           className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
           type="text"
-          name="name"
+          name="Name"
           placeholder="Digite o nome do prato"
-          value={values.name}
+          value={values.Name}
           onChange={handleChange}
         />
         <label
@@ -108,35 +116,36 @@ const NewRecipe = () => {
         </label>
         <input type="file" name="Upload de arquivo" className="mt-6" />
         <label
-          htmlFor="cookTime"
-          className="text-dark_grey text-2xl font-light mt-6"
-        >
-          Tempo de preparo
-        </label>
-        <input
-          className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
-          type="text"
-          name="cookTime"
-          placeholder="Digite o tempo de preparo"
-          value={values.cookTime}
-          onChange={handleChange}
-        />
-        <label
-          htmlFor="price"
+          htmlFor="Price"
           className="text-dark_grey text-2xl font-light mt-6"
         >
           Preço
         </label>
         <input
-          name="price"
+          name="Price"
           id="price"
           className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
           placeholder="Digite o preço do prato"
-          value={values.price}
+          value={values.Price}
           onChange={handleChange}
         />
         <label
-          htmlFor="ingredientsList"
+          htmlFor="CookTime"
+          className="text-dark_grey text-2xl font-light mt-6"
+        >
+          Tempo de preparo em minutos
+        </label>
+        <input
+          type="number"
+          name="CookTime"
+          id="cookTime"
+          className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
+          placeholder="Digite o tempo de preparo do prato"
+          value={values.CookTime}
+          onChange={handleChange}
+        />
+        <label
+          htmlFor="Description"
           className="text-dark_grey text-2xl font-light mt-6"
         >
           Ingredientes
@@ -144,9 +153,9 @@ const NewRecipe = () => {
         <input
           className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
           type="text"
-          name="ingredientsList"
+          name="Description"
           placeholder="Digite a lista de ingredientes separados por virgula. Ex: Arroz, Feijão..."
-          value={values.ingredientsList}
+          value={values.Description}
           onChange={handleChange}
         />
         <div className="flex flex-col justify-center items-center ">
