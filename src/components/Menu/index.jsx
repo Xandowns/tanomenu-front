@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
@@ -6,13 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { ReactComponent as Delete } from '../../assets/deletar-usuario.svg';
 import { ReactComponent as Edit } from '../../assets/editar.svg';
 import { ReactComponent as Dinheiro } from '../../assets/dinheiro.svg';
-import { ReactComponent as Casa } from '../../assets/casa.svg';
+import { ReactComponent as RecipeIcon } from '../../assets/recipeIcon.svg';
 import { ReactComponent as Clock } from '../../assets/clock.svg';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Menu = ({
-  id, name, price, cookTime, ingredientsList,
+  id, name, price, cookTime, description,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [data, setData] = useState({
@@ -20,13 +21,11 @@ const Menu = ({
     name,
     price,
     cookTime,
-    ingredientsList,
+    description,
   });
 
-  const handleDelete = async () => {
-    await api.delete(`/api/clients/${id}`);
-    notifyDeleteSucces();
-  };
+  const token = localStorage.getItem('token');
+  api.defaults.headers.Authorization = `bearer ${token}`;
 
   const notifyDeleteSucces = () => toast.success('😎👍 O prato foi deletado com sucesso.', {
     position: 'top-right',
@@ -38,14 +37,17 @@ const Menu = ({
     progress: undefined,
   });
 
-  const handleEdit = () => {
+  const handleDelete = () => {
     api
-      .put(`/api/clients/${id}`, data)
+      .delete(`/Recipe/${id}`, data)
       .then(() => {
-        notifyEditSucces();
+        notifyDeleteSucces();
         setModalIsOpen(false);
       })
-      .catch(() => notifyEditError());
+      .catch((error) => {
+        notifyDeleteSucces();
+        console.log(error.response.data);
+      });
   };
 
   const notifyEditSucces = () => toast.success('😎👍 Edição efetuada com sucesso.', {
@@ -57,6 +59,7 @@ const Menu = ({
     draggable: true,
     progress: undefined,
   });
+
   const notifyEditError = () => toast.error(
     '💀 Um erro ocorreu. Verifique se todos os campos estão preenchidos',
     {
@@ -70,6 +73,19 @@ const Menu = ({
     },
   );
 
+  const handleEdit = () => {
+    api
+      .put(`/Recipe/${id}`, data)
+      .then(() => {
+        notifyEditSucces();
+        setModalIsOpen(false);
+      })
+      .catch((error) => {
+        notifyEditError();
+        console.log(error.response.data);
+      });
+  };
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -79,10 +95,10 @@ const Menu = ({
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name: nameField, value } = e.target;
     setData({
       ...data,
-      [name]: value,
+      [nameField]: value,
     });
   };
 
@@ -159,7 +175,7 @@ const Menu = ({
             onChange={handleChange}
           />
           <label
-            htmlFor="ingredientsList"
+            htmlFor="description"
             className="text-dark_grey text-2xl font-light mt-6 w"
           >
             Ingredientes
@@ -167,8 +183,8 @@ const Menu = ({
           <input
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
-            name="ingredientsList"
-            value={data.ingredientsList}
+            name="description"
+            value={data.description}
             onChange={handleChange}
           />
           <button
@@ -182,17 +198,25 @@ const Menu = ({
       </Modal>
       <div className=" flex flex-col md:flex-row border-t p-4">
         <p className="font-bold text-dark_grey md:w-2/6">{data.name}</p>
-        <div className="flex flex-row md:w-2/6">
+        <div className="flex flex-row md:w-1/6">
           <Dinheiro className="h-12 w-12 pb-5" />
-          <p className="text-dark_grey md:pl-2">{data.price}</p>
+          <p className="text-dark_grey md:pl-2">
+            R$
+            {' '}
+            {data.price}
+          </p>
         </div>
         <div className="flex flex-row md:w-1/6">
           <Clock className="h-12 w-12 pb-5" />
-          <p className="text-dark_grey md:pl-2">{data.cookTime}</p>
+          <p className="text-dark_grey md:pl-2">
+            {data.cookTime}
+            {' '}
+            min
+          </p>
         </div>
         <div className="flex flex-row md:w-11/12">
-          <Casa className="h-12 w-12 pb-5" />
-          <p className="text-dark_grey md:pl-2">{data.ingredientsList}</p>
+          <RecipeIcon className="h-12 w-12 pb-5" />
+          <p className="text-dark_grey md:pl-2">{data.description}</p>
         </div>
         <div className="flex flex-row md:w-6/6">
           <Delete

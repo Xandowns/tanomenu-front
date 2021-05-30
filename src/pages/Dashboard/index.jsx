@@ -1,21 +1,24 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import Menu from '../../components/Menu/index';
 import api from '../../services/api';
 
 const Dashboard = () => {
-  const [clientsData, setClientsData] = useState([]);
+  const [recipeData, setRecipeData] = useState([]);
   const token = localStorage.getItem('token');
   api.defaults.headers.Authorization = token;
+  const establishmentId = jwtDecode(token).nameid;
 
   useEffect(() => {
-    const getClientData = async () => {
-      const response = await api.get('/api/clients/gym/1');
-      setClientsData(response.data.clients.data);
+    const getRecipesData = async () => {
+      const response = await api.get(`/Establishment/${establishmentId}`);
+      setRecipeData(response.data.recipes);
     };
 
-    getClientData();
-  }, [clientsData]);
+    getRecipesData();
+  }, [recipeData]);
 
   return (
     <>
@@ -34,21 +37,13 @@ const Dashboard = () => {
         </Link>
       </div>
       <div className="flex flex-col justify-center p-4 lg:px-40 ">
-        <Menu
-          key={1}
-          id={1}
-          name="Feijoada"
-          price="R$ 13,99"
-          weight="Teste"
-          cookTime="20 Min"
-          ingredientsList="Feijão Preto, Couve, Porco, Torresmo, Limão"
-        />
-        {clientsData.map((recipe, i) => (
+        {recipeData.map((recipe, i) => (
           <Menu
             key={i}
             id={recipe.id}
-            image={recipe.img}
             name={recipe.name}
+            cookTime={recipe.cookTime}
+            price={recipe.price}
             description={recipe.description}
           />
         ))}
