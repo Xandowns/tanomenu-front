@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import InputMask from 'react-input-mask';
@@ -46,7 +47,7 @@ const Signup = () => {
     Complement: '',
     Neighborhood: '',
     Zip: '',
-    City: '',
+    City: 'Cachoeira Paulista',
     Phone: '',
     Picture: null,
     Email: '',
@@ -242,14 +243,19 @@ const Signup = () => {
             {' '}
             <span className="text-red-500">*</span>
           </label>
-          <input
+          <select
             className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none"
             type="text"
             name="City"
-            placeholder="Digite a cidade do restaurante"
             value={values.City}
             onChange={handleChange}
-          />
+            defaultValue="Cachoeira Paulista"
+          >
+            <option value="Cachoeira Paulista"> Cachoeira Paulista </option>
+            <option value="Lorena"> Lorena </option>
+            <option value="Cruzeiro"> Cruzeiro </option>
+            <option value="Canas"> Canas </option>
+          </select>
           <label className="text-dark_grey text-2xl font-light mt-6 w" htmlFor="Phone">
             Telefone
             {' '}
