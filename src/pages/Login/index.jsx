@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import AuthContext from '../../context/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import api from '../../services/api';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -10,13 +12,50 @@ const Login = () => {
     password: '',
   });
 
-  const { signed, signIn } = useContext(AuthContext);
-
   const history = useHistory();
 
-  const handleSignIn = () => {
-    signIn(values.email, values.password, 'gym');
-    history.push('/dashboard');
+  const notify = () => toast.success(
+    '😎👍 Login efetuado com sucesso. Você sera redirecionado para a dashboard',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
+  const notifyError = () => toast.error(
+    '💀 Um erro ocorreu. Verifique se o email e a senha estão corretos',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    },
+  );
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    api
+      .post('/Authentication/login', values)
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.token);
+          notify();
+          setTimeout(() => {
+            history.push('/dashboard');
+          }, 4000);
+        }
+      })
+      .catch((error) => {
+        notifyError();
+        console.log(error.response.data);
+      });
   };
 
   const handleChange = (e) => {
@@ -29,6 +68,17 @@ const Login = () => {
 
   return (
     <div className="flex flex-col mx-auto justify-center p-4 lg:w-4/12 lg:mt-32">
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <h1 className="font-bold text-4xl text-dark_grey">Faça Login</h1>
       <h4 className="text-dark_grey font-light text-lg">
         Para visualizar o painel de ações é necessario fazer login
