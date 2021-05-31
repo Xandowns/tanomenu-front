@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { ReactComponent as Dinheiro } from '../../assets/dinheiro.svg';
 
-const LoginClient = () => {
+const NewOrder = () => {
   const [values, setValues] = useState({
     City: 'Cachoeira Paulista',
     Establishment: '',
@@ -45,8 +45,6 @@ const LoginClient = () => {
     const resposnse = await api.get(`/Establishment/${establishmentInfo[0].id}`);
     setMenu(resposnse.data.recipes);
   };
-
-  console.log(menu);
 
   return (
     <div className="flex flex-col mx-auto justify-center p-4 lg:w-4/12 lg:mt-16">
@@ -149,4 +147,4 @@ const LoginClient = () => {
   );
 };
 
-export default LoginClient;
+export default NewOrder;

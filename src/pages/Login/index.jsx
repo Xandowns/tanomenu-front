@@ -54,6 +54,7 @@ const Login = () => {
       })
       .catch((error) => {
         notifyError();
+        // eslint-disable-next-line no-console
         console.log(error.response.data);
       });
   };

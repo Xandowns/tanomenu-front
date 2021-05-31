@@ -46,6 +46,7 @@ const Menu = ({
       })
       .catch((error) => {
         notifyDeleteSucces();
+        // eslint-disable-next-line no-console
         console.log(error.response.data);
       });
   };
@@ -82,6 +83,7 @@ const Menu = ({
       })
       .catch((error) => {
         notifyEditError();
+        // eslint-disable-next-line no-console
         console.log(error.response.data);
       });
   };

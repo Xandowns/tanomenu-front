@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Instructors from '../../components/Instructors';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 

@@ -60,8 +60,6 @@ const Signup = () => {
       ...values,
       [name]: value,
     });
-
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
@@ -77,6 +75,7 @@ const Signup = () => {
         }
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error.response.data);
         notifyError();
       });
@@ -121,7 +120,7 @@ const Signup = () => {
             <span className="text-red-500">*</span>
           </label>
           <input
-            className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
+            className="border-b py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
             type="password"
             name="Password"
             placeholder="Digite sua senha"
@@ -233,7 +232,7 @@ const Signup = () => {
           <InputMask
             mask="99999-999"
             value={values.Zip}
-            className="border-b border-gray-600 placeholder-gray-600 py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
+            className="border-b py-1 text-dark_grey outline-none border-gray-600 placeholder-gray-600"
             name="Zip"
             placeholder="Digite o cep do restaurante"
             onChange={handleChange}
