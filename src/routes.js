@@ -7,14 +7,14 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/SignupEstablishment';
 import NewRecipe from './pages/NewRecipe';
-import Pedidos from './pages/Pedidos';
-import LoginClient from './pages/LoginClient';
+import Pedidos from './pages/Orders';
+import NewOrder from './pages/NewOrder';
 
 const Routes = () => (
   <Switch>
     <Route name="" exact path="/" component={Home} />
     <Route exact path="/login" component={Login} />
-    <Route path="/fazer-pedido" component={LoginClient} />
+    <Route path="/fazer-pedido" component={NewOrder} />
     <Route path="/cadastro-restaurante" component={Signup} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/pedidos" component={Pedidos} />
